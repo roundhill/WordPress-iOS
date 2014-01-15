@@ -67,7 +67,7 @@
         [self.delegate textViewDidBeginEditing:self];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidBeginEditingNotification object:self];
-    if (![self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)] || [self.delegate textView:self shouldChangeTextInRange:NSMakeRange([currentText length], 0) replacementText:text]) {
+    if (![self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)] || [self.delegate textView:self shouldChangeTextInRange:NSMakeRange([currentText length], 0) replacementText:text]) {
         self.text = [currentText stringByAppendingString:text];
         if ([self.delegate respondsToSelector:@selector(textViewDidChange:)]) {
             [self.delegate textViewDidChange:self];
