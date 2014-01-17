@@ -49,6 +49,7 @@
         _boldButton.frame = CGRectMake(x, 0, width, height);
         x += _boldButton.frame.size.width;
         _boldButton.actionTag = @"strong";
+        _boldButton.accessibilityLabel = @"strong";
         _boldButton.actionName = NSLocalizedString(@"bold", @"Bold text formatting in the Post Editor. This string will be used in the Undo message if the last change was adding formatting.");
         _boldButton.exclusiveTouch = YES;
         [_boldButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];

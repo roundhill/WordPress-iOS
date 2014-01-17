@@ -18,3 +18,4 @@ extern const NSTimeInterval AsyncTestCaseDefaultTimeout;
 @end
 
 #define AsyncTestHelperWait(helper) XCTAssertTrue([helper wait], @"Async helper timed out")
+#define AsyncTestHelperSleep(time) do {[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:time]];} while (0)

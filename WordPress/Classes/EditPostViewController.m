@@ -17,6 +17,7 @@
 #import "WPBlogSelectorButton.h"
 
 NSString *const EditPostViewControllerLastUsedBlogURL = @"EditPostViewControllerLastUsedBlogURL";
+NSString *const EditPostViewControllerRevisionCreatedNotificationName = @"EditPostViewControllerRevisionCreatedNotification";
 CGFloat const EPVCTextfieldHeight = 44.0f;
 CGFloat const EPVCCellHeight = 44.0f;
 CGFloat const EPVCToolbarHeight = 44.0f;
@@ -37,8 +38,14 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
 
 @implementation EditPostViewController
 
+/**
+ Returns the blog to use for a new draft.
+ 
+ By default it returns the first blog by name. If the user has previously switched to a different blog, it will return the last blog selected by the user.
+ 
+ @return the last used blog, otherwise it returns the first blog by name, or nil if there are no blogs
+ */
 + (Blog *)blogForNewDraft {
-    // Try to get the last used blog, if there is one.
     NSManagedObjectContext *context = [[ContextManager sharedInstance] mainContext];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Blog"];
     NSString *url = [[NSUserDefaults standardUserDefaults] stringForKey:EditPostViewControllerLastUsedBlogURL];
@@ -78,7 +85,11 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
 
 - (id)initWithDraftForLastUsedBlog {
     Blog *blog = [EditPostViewController blogForNewDraft];
-    return [self initWithPost:[Post newDraftForBlog:blog]];
+    Post *post = nil;
+    if (blog) {
+        post = [Post newDraftForBlog:blog];
+    }
+    return [self initWithPost:post];
 }
 
 - (id)initWithPost:(AbstractPost *)post {
@@ -820,6 +831,7 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
         self.post = [self.post createRevision];
         [self.post save];
         [self refreshUIForCurrentPost];
+        [[NSNotificationCenter defaultCenter] postNotificationName:EditPostViewControllerRevisionCreatedNotificationName object:self];
     }];
 }
 

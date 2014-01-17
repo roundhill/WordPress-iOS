@@ -45,6 +45,10 @@ static NSString *const SelectionTableRowCell = @"SelectionTableRowCell";
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (parent == nil ) {
         [self clean];

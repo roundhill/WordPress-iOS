@@ -15,6 +15,8 @@
 #import "WPKeyboardToolbarBase.h"
 #import "WPKeyboardToolbarDone.h"
 
+extern NSString * const EditPostViewControllerRevisionCreatedNotificationName;
+
 typedef NS_ENUM(NSInteger, EditPostViewControllerAlertTag) {
     EditPostViewControllerAlertTagNone,
     EditPostViewControllerAlertTagLinkHelper,
@@ -52,5 +54,12 @@ typedef NS_ENUM(NSUInteger, EditPostViewControllerMode) {
 @property (nonatomic, strong) NSString *statsPrefix;
 
 - (void)didSaveNewPost;
+
+///===================
+/// @name Test helpers
+///===================
+
+- (void)autosaveContent;
+- (void)showSettings;
 
 @end
