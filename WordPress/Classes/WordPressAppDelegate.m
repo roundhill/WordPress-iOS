@@ -140,7 +140,11 @@ static NSString *const CameraPlusImagesNotification = @"CameraPlusImagesNotifica
     [self configureAppirater];
     [self.window makeKeyAndVisible];
     [self showWelcomeScreenIfNeededAnimated:NO];
-    [Appirater appLaunched:YES];
+    
+    if ([WPAccount defaultWordPressComAccount]) {
+        // Only use Appirater for WordPress.com accounts
+        [Appirater appLaunched:YES];
+    }
     
     return YES;
 }
@@ -262,7 +266,10 @@ static NSString *const CameraPlusImagesNotification = @"CameraPlusImagesNotifica
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     DDLogInfo(@"%@ %@", self, NSStringFromSelector(_cmd));
     [WPMobileStats resumeSession];
-    [Appirater appEnteredForeground:YES];
+    if ([WPAccount defaultWordPressComAccount]) {
+        // Only use Appirater for WordPress.com accounts
+        [Appirater appEnteredForeground:YES];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
