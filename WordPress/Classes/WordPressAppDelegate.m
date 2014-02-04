@@ -665,6 +665,7 @@ static NSString *const CameraPlusImagesNotification = @"CameraPlusImagesNotifica
     NSInteger crashCount = [defaults integerForKey:@"crashCount"];
     crashCount += 1;
     [defaults setInteger:crashCount forKey:@"crashCount"];
+    [defaults setObject:@YES forKey:kAppiraterRatedCurrentVersion];
     [defaults synchronize];
     [WPMobileStats trackEventForSelfHostedAndWPCom:@"Crashed" properties:@{@"crash_id": crash.identifier}];
 }
