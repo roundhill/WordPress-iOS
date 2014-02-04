@@ -1,5 +1,6 @@
 PODS:
   - AFNetworking (1.2.0)
+  - Appirater (2.0.2)
   - CocoaLumberjack (1.6.3):
     - CocoaLumberjack/Core
     - CocoaLumberjack/Extensions
@@ -42,6 +43,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 1.2.0)
+  - Appirater
   - CocoaLumberjack (= 1.6.2)
   - CocoaLumberjack (~> 1.6.2)
   - CrashlyticsLumberjack (~> 1.0.0)
@@ -76,6 +78,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 3cbae45f61a9f995cdbd56bd571223910d7f4e44
+  Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
   CocoaLumberjack: d62b2c37c8bdac37094d710bfa978eb6e2fe650e
   CrashlyticsLumberjack: 3a1647407e3c980545175e7a56d073c58beeab03
   DTCoreText: e48c1526945272133b8c935c40da3f3e79836f1b
