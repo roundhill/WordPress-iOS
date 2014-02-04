@@ -148,9 +148,9 @@ static NSString *const CameraPlusImagesNotification = @"CameraPlusImagesNotifica
 - (void)configureAppirater
 {
     [Appirater setAppId:@"335703880"];
-    [Appirater setDaysUntilPrompt:-1];
-    [Appirater setUsesUntilPrompt:-1];
-    [Appirater setSignificantEventsUntilPrompt:1];
+    [Appirater setDaysUntilPrompt:7];
+    [Appirater setUsesUntilPrompt:5];
+    [Appirater setSignificantEventsUntilPrompt:5];
     [Appirater setTimeBeforeReminding:2];
 }
 
