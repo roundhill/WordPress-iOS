@@ -7,6 +7,7 @@
 //
 
 #import <DTCoreText/DTCoreText.h>
+#import <Appirater/Appirater.h>
 #import "DTCoreTextFontDescriptor.h"
 #import "WPTableViewControllerSubclass.h"
 #import "ReaderPostsViewController.h"
@@ -378,6 +379,7 @@ NSString * const RPVCDisplayedNativeFriendFinder = @"DisplayedNativeFriendFinder
     ReaderPost *post = postView.post;
 	[post toggleLikedWithSuccess:^{
         if ([post.isLiked boolValue]) {
+            [Appirater userDidSignificantEvent:YES];
             [WPMobileStats trackEventForWPCom:StatsEventReaderLikedPost];
         } else {
             [WPMobileStats trackEventForWPCom:StatsEventReaderUnlikedPost];

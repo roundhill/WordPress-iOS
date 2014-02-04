@@ -3,6 +3,7 @@
 //  WordPress
 //
 
+#import <Appirater/Appirater.h>
 #import "ReaderCommentPublisher.h"
 #import "ContextManager.h"
 #import "NSString+Util.h"
@@ -126,6 +127,8 @@
         self.composeView.enabled = YES;
         [self.delegate commentPublisherDidPublishComment:self];
 
+        [Appirater userDidSignificantEvent:YES];
+        
         // clear the draft comment for this post if there is one
         self.post.storedComment = nil;
 

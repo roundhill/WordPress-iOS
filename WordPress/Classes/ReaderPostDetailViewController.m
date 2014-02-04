@@ -9,6 +9,7 @@
 
 #import "ReaderPostDetailViewController.h"
 #import "ReaderPostsViewController.h"
+#import <Appirater/Appirater.h>
 #import <DTCoreText/DTCoreText.h>
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -618,6 +619,7 @@ typedef enum {
     ReaderPost *post = postView.post;
 	[post toggleLikedWithSuccess:^{
         if ([post.isLiked boolValue]) {
+            [Appirater userDidSignificantEvent:YES];
             [WPMobileStats trackEventForWPCom:StatsEventReaderLikedPost];
         } else {
             [WPMobileStats trackEventForWPCom:StatsEventReaderUnlikedPost];
