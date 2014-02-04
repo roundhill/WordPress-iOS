@@ -8,6 +8,7 @@
 
 #import <WPXMLRPC/WPXMLRPC.h>
 #import <QuartzCore/QuartzCore.h>
+#import <Appirater/Appirater.h>
 #import "LoginViewController.h"
 #import "CreateAccountAndBlogViewController.h"
 #import "AboutViewController.h"
@@ -552,6 +553,8 @@ CGFloat const GeneralWalkthroughStatusBarOffset = 20.0;
     if (![WPAccount defaultWordPressComAccount]) {
         [delegate showBlogListTab];
     }
+    
+    [Appirater userDidSignificantEvent:YES];
     
     self.parentViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
