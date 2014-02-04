@@ -890,7 +890,7 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
     
     [self didSaveNewPost];
     
-    [Appirater userDidSignificantEvent:YES];
+    [Appirater userDidSignificantEvent:NO];
 
     [self dismissEditView];
 }

@@ -338,7 +338,7 @@ const CGFloat NotificationsCommentDetailViewControllerReplyTextViewDefaultHeight
             [self.inlineComposeView clearText];
             self.inlineComposeView.enabled = YES;
             [self.inlineComposeView dismissComposer];
-            [Appirater userDidSignificantEvent:YES];
+            [Appirater userDidSignificantEvent:NO];
             [WPToast showToastWithMessage:NSLocalizedString(@"Replied", @"User replied to a comment")
                                  andImage:[UIImage imageNamed:@"action_icon_replied"]];
 

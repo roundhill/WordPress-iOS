@@ -127,7 +127,7 @@
         self.composeView.enabled = YES;
         [self.delegate commentPublisherDidPublishComment:self];
 
-        [Appirater userDidSignificantEvent:YES];
+        [Appirater userDidSignificantEvent:NO];
         
         // clear the draft comment for this post if there is one
         self.post.storedComment = nil;

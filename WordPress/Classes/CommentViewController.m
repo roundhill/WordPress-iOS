@@ -338,7 +338,7 @@ CGFloat const CommentViewUnapproveButtonTag = 701;
     [self.reply uploadWithSuccess:^{
         // the current modal experience shows success by dismissising the editor
         // ideally we switch to an optimistic experience
-        [Appirater userDidSignificantEvent:YES];
+        [Appirater userDidSignificantEvent:NO];
     } failure:^(NSError *error) {
         // reset to draft status, AppDelegate automatically shows UIAlert when comment fails
         self.reply.status = CommentStatusDraft;

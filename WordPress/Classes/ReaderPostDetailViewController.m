@@ -619,7 +619,7 @@ typedef enum {
     ReaderPost *post = postView.post;
 	[post toggleLikedWithSuccess:^{
         if ([post.isLiked boolValue]) {
-            [Appirater userDidSignificantEvent:YES];
+            [Appirater userDidSignificantEvent:NO];
             [WPMobileStats trackEventForWPCom:StatsEventReaderLikedPost];
         } else {
             [WPMobileStats trackEventForWPCom:StatsEventReaderUnlikedPost];

@@ -554,7 +554,7 @@ CGFloat const GeneralWalkthroughStatusBarOffset = 20.0;
         [delegate showBlogListTab];
     }
     
-    [Appirater userDidSignificantEvent:YES];
+    [Appirater userDidSignificantEvent:NO];
     
     self.parentViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
