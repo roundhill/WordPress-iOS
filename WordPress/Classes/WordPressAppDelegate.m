@@ -16,6 +16,7 @@
 #import <GooglePlus/GooglePlus.h>
 #import <HockeySDK/HockeySDK.h>
 #import <UIDeviceIdentifier/UIDeviceHardware.h>
+#import <Appirater/Appirater.h>
 
 #import "WordPressAppDelegate.h"
 #import "CameraPlusPickerManager.h"
@@ -134,12 +135,23 @@ static NSString *const CameraPlusImagesNotification = @"CameraPlusImagesNotifica
     if (application.applicationState == UIApplicationStateActive) {
         [NotificationsManager handleNotificationForApplicationLaunch:launchOptions];
     }
-
-    [self.window makeKeyAndVisible];
     
-    [self showWelcomeScreenIfNeededAnimated:NO];
 
+    [self configureAppirater];
+    [self.window makeKeyAndVisible];
+    [self showWelcomeScreenIfNeededAnimated:NO];
+    [Appirater appLaunched:YES];
+    
     return YES;
+}
+
+- (void)configureAppirater
+{
+    [Appirater setAppId:@"335703880"];
+    [Appirater setDaysUntilPrompt:-1];
+    [Appirater setUsesUntilPrompt:-1];
+    [Appirater setSignificantEventsUntilPrompt:1];
+    [Appirater setTimeBeforeReminding:2];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -250,6 +262,7 @@ static NSString *const CameraPlusImagesNotification = @"CameraPlusImagesNotifica
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     DDLogInfo(@"%@ %@", self, NSStringFromSelector(_cmd));
     [WPMobileStats resumeSession];
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
