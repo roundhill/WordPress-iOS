@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 WordPress. All rights reserved.
 //
 
+#import <Appirater/Appirater.h>
 #import "EditPostViewController.h"
 #import "EditPostViewController_Internal.h"
 #import "ContextManager.h"
@@ -888,6 +889,8 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
     }
     
     [self didSaveNewPost];
+    
+    [Appirater userDidSignificantEvent:YES];
 
     [self dismissEditView];
 }
