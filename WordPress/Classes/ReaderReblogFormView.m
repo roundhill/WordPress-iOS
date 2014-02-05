@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 WordPress. All rights reserved.
 //
 
+#import <Appirater/Appirater.h>
 #import "ReaderReblogFormView.h"
 #import "WordPressComApi.h"
 #import "WPToast.h"
@@ -195,6 +196,7 @@
 			[self.delegate readerTextFormDidSend:self];
 		}
         
+        [Appirater userDidSignificantEvent:NO];
         [WPMobileStats trackEventForWPCom:StatsEventReaderReblogged];
 		
 	} failure:^(NSError *error) {
