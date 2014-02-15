@@ -19,6 +19,7 @@ PODS:
     - DTFoundation/Core
   - EmailChecker (0.1)
   - google-plus-ios-sdk (1.3.0)
+  - Helpshift (4.2.0)
   - HockeySDK (3.5.2)
   - MGImageUtilities (0.0.1)
   - Mixpanel (2.3.1)
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - DTCoreText (= 1.6.9)
   - EmailChecker (from `https://raw.github.com/wordpress-mobile/EmailChecker/master/ios/EmailChecker.podspec`)
   - google-plus-ios-sdk (= 1.3.0)
+  - Helpshift
   - HockeySDK (~> 3.5.0)
   - MGImageUtilities (from `git://github.com/wordpress-mobile/MGImageUtilities.git`)
   - Mixpanel (= 2.3.1)
@@ -82,6 +84,7 @@ SPEC CHECKSUMS:
   DTFoundation: 23d39b258d481221167cd4bf3df86ff3f22b1f55
   EmailChecker: e909e6d113fac7ad5e3c304fabce30fc4a79c80e
   google-plus-ios-sdk: 38378c4094a72a4fcdd5254c03fdd1813b345fb9
+  Helpshift: a71c6cbe9de11f12e90e88a2f5a847976ebf4a11
   HockeySDK: 203d3af93c2a229bfb528ff085201670ff65e1cf
   MGImageUtilities: ab3580f2161b10f8a41331baea87aaafbd688950
   Mixpanel: 8d189c58bcaac429de9cb4f18a54621df99b7e38

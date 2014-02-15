@@ -706,6 +706,7 @@
 		85A69D0217C530FE0061E254 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85A69CFF17C530FE0061E254 /* OpenSans-BoldItalic.ttf */; };
 		85A69D0317C530FE0061E254 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85A69D0017C530FE0061E254 /* OpenSans-Italic.ttf */; };
 		85A69D0417C530FE0061E254 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85A69D0117C530FE0061E254 /* OpenSans-LightItalic.ttf */; };
+		85A82AB018AEEA23004C037B /* HelpshiftConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85A82AAF18AEEA23004C037B /* HelpshiftConfig.plist */; };
 		85AD6AEC173CCF9E002CB896 /* WPNUXPrimaryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 85AD6AEB173CCF9E002CB896 /* WPNUXPrimaryButton.m */; };
 		85AD6AEF173CCFDC002CB896 /* WPNUXSecondaryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 85AD6AEE173CCFDC002CB896 /* WPNUXSecondaryButton.m */; };
 		85AD6B1E17405889002CB896 /* WPNUXUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 85AD6B1D17405888002CB896 /* WPNUXUtility.m */; };
@@ -1834,6 +1835,7 @@
 		85A69CFF17C530FE0061E254 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		85A69D0017C530FE0061E254 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		85A69D0117C530FE0061E254 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		85A82AAF18AEEA23004C037B /* HelpshiftConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HelpshiftConfig.plist; sourceTree = "<group>"; };
 		85AD6AEA173CCF9E002CB896 /* WPNUXPrimaryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPNUXPrimaryButton.h; sourceTree = "<group>"; };
 		85AD6AEB173CCF9E002CB896 /* WPNUXPrimaryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPNUXPrimaryButton.m; sourceTree = "<group>"; };
 		85AD6AED173CCFDC002CB896 /* WPNUXSecondaryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPNUXSecondaryButton.h; sourceTree = "<group>"; };
@@ -2485,6 +2487,7 @@
 				E1D91454134A853D0089019C /* Localizable.strings */,
 				930C6374182BD86400976C21 /* WordPress-Internal-Info.plist */,
 				E125443B12BF5A7200D87A0A /* WordPress.xcdatamodeld */,
+				85A82AAF18AEEA23004C037B /* HelpshiftConfig.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4678,6 +4681,7 @@
 				3029D8351859359C00298395 /* icon_format_italic_highlighted@2x.png in Resources */,
 				85325A3817BB0DF8008E87D1 /* icon-menu-reader-active.png in Resources */,
 				374F18CD15A5897500524ED0 /* SidebarToolbarButton@2x.png in Resources */,
+				85A82AB018AEEA23004C037B /* HelpshiftConfig.plist in Resources */,
 				5DD8A6E415A5ECDC00A673A4 /* sync_dark.png in Resources */,
 				E233414E182DB69500A4CC40 /* btn-back-chevron.png in Resources */,
 				5DD8A6E515A5ECDC00A673A4 /* sync_dark@2x.png in Resources */,

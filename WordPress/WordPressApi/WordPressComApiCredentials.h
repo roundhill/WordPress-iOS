@@ -17,4 +17,7 @@
 + (NSString *)hockeyappAppId;
 + (NSString *)googlePlusClientId;
 + (NSString *)quantcastAPIKey;
++ (NSString *)helpshiftAPIKey;
++ (NSString *)helpshiftDomainName;
++ (NSString *)helpshiftAppId;
 @end

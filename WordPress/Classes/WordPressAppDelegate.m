@@ -16,6 +16,7 @@
 #import <GooglePlus/GooglePlus.h>
 #import <HockeySDK/HockeySDK.h>
 #import <UIDeviceIdentifier/UIDeviceHardware.h>
+#import <Helpshift/Helpshift.h>
 
 #import "WordPressAppDelegate.h"
 #import "CameraPlusPickerManager.h"
@@ -139,6 +140,8 @@ static NSString *const CameraPlusImagesNotification = @"CameraPlusImagesNotifica
     [self.window makeKeyAndVisible];
     
     [self showWelcomeScreenIfNeededAnimated:NO];
+    
+    [Helpshift installForApiKey:[WordPressComApiCredentials helpshiftAPIKey] domainName:[WordPressComApiCredentials helpshiftDomainName] appID:[WordPressComApiCredentials helpshiftAppId]];
 
     return YES;
 }

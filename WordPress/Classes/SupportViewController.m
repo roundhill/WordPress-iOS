@@ -12,6 +12,7 @@
 #import <UIDeviceIdentifier/UIDeviceHardware.h>
 #import "WordPressAppDelegate.h"
 #import <DDFileLogger.h>
+#import <Helpshift/Helpshift.h>
 
 static NSString *const UserDefaultsFeedbackEnabled = @"wp_feedback_enabled";
 static NSString *const FeedbackCheckUrl = @"http://api.wordpress.org/iphoneapp/feedback-check/1.0/";
@@ -117,7 +118,7 @@ typedef NS_ENUM(NSInteger, SettingsViewControllerSections)
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == SettingsSectionFAQForums)
-        return 2;
+        return 3;
     
     if (section == SettingsSectionActivityLog) {
         return 3;
@@ -170,6 +171,9 @@ typedef NS_ENUM(NSInteger, SettingsViewControllerSections)
     } else if (indexPath.section == SettingsSectionFAQForums && indexPath.row == 1) {
         cell.textLabel.text = NSLocalizedString(@"WordPress Forums", @"");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if (indexPath.section == SettingsSectionFAQForums && indexPath.row == 2) {
+        cell.textLabel.text = NSLocalizedString(@"Contact Us", nil);
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == SettingsSectionFeedback) {
         cell.textLabel.text = NSLocalizedString(@"E-mail Support", @"");
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -220,9 +224,11 @@ typedef NS_ENUM(NSInteger, SettingsViewControllerSections)
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     if (indexPath.section == SettingsSectionFAQForums && indexPath.row == 0) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://ios.wordpress.org/faq"]];
+        [[Helpshift sharedInstance] showFAQs:self withOptions:nil];
     } else if (indexPath.section == SettingsSectionFAQForums && indexPath.row == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://ios.forums.wordpress.org"]];
+    } else if (indexPath.section == SettingsSectionFAQForums && indexPath.row == 2) {
+        [[Helpshift sharedInstance] showConversation:self withOptions:nil];
     } else if (indexPath.section == SettingsSectionFeedback) {
         if ([MFMailComposeViewController canSendMail]) {
             MFMailComposeViewController *mailComposeViewController = [self feedbackMailViewController];
