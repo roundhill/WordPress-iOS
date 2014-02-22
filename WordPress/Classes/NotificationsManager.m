@@ -26,18 +26,24 @@ NSString *const NotificationsDeviceToken = @"apnsDeviceToken";
 #if TARGET_IPHONE_SIMULATOR
     return;
 #endif
-    if ([WPAccount defaultWordPressComAccount]) {
-        [[UIApplication sharedApplication]
-         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                             UIRemoteNotificationTypeSound |
-                                             UIRemoteNotificationTypeAlert)];
-    }
+    [[UIApplication sharedApplication]
+     registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                         UIRemoteNotificationTypeSound |
+                                         UIRemoteNotificationTypeAlert)];
 }
 
 
 #pragma mark - Device token registration
 
 + (void)registerDeviceToken:(NSData *)deviceToken {
+    // We want to register Helpshift regardless so that way if a user isn't logged in
+    // they can still get push notifications that we replied to their support ticket.
+    [[Helpshift sharedInstance] registerDeviceToken:deviceToken];
+
+    // Don't bother registering for WordPress anything if the user isn't logged in
+    if (![WPAccount defaultWordPressComAccount])
+        return;
+
     NSString *newToken = [[[[deviceToken description]
                            stringByReplacingOccurrencesOfString: @"<" withString: @""]
                           stringByReplacingOccurrencesOfString: @">" withString: @""]
@@ -53,8 +59,6 @@ NSString *const NotificationsDeviceToken = @"apnsDeviceToken";
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-    [[Helpshift sharedInstance] registerDeviceToken:deviceToken];
-
     [self syncPushNotificationInfo];
 }
 
