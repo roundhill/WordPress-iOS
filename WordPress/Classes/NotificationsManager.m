@@ -7,6 +7,7 @@
  * Some rights reserved. See license.txt
  */
 
+#import <Helpshift/Helpshift.h>
 #import "NotificationsManager.h"
 #import "Note.h"
 #import "WordPressAppDelegate.h"
@@ -51,6 +52,8 @@ NSString *const NotificationsDeviceToken = @"apnsDeviceToken";
         [[NSUserDefaults standardUserDefaults] setObject:newToken forKey:NotificationsDeviceToken];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
+    [[Helpshift sharedInstance] registerDeviceToken:deviceToken];
 
     [self syncPushNotificationInfo];
 }
@@ -82,6 +85,11 @@ NSString *const NotificationsDeviceToken = @"apnsDeviceToken";
 
 + (void)handleNotification:(NSDictionary *)userInfo forState:(UIApplicationState)state completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     DDLogVerbose(@"Received push notification:\nPayload: %@\nCurrent Application state: %d", userInfo, state);
+    
+    if ([[userInfo objectForKey:@"origin"] isEqualToString:@"helpshift"]) {
+        [[Helpshift sharedInstance] handleRemoteNotification:userInfo withController:[[UIApplication sharedApplication] keyWindow].rootViewController];
+        return;
+    }
     
     if ([userInfo stringForKey:@"type"]) { //check if it is the badge reset PN
         NSString *notificationType = [userInfo stringForKey:@"type"];
