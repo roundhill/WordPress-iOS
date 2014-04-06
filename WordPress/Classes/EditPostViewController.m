@@ -9,6 +9,7 @@
 #import "WPAlertView.h"
 #import "UIImage+Util.h"
 #import "LocationService.h"
+#import "DTCoreText.h"
 
 NSString *const WPEditorNavigationRestorationID = @"WPEditorNavigationRestorationID";
 NSString *const WPAbstractPostRestorationKey = @"WPAbstractPostRestorationKey";
@@ -904,10 +905,15 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
 
 // Save changes to core data
 - (void)autosaveContent {
+    
+    DTHTMLWriter *htmlWriter = [[DTHTMLWriter alloc] initWithAttributedString:_textView.attributedText];
+    
     self.post.postTitle = _titleTextField.text;
     self.navigationItem.title = [self editorTitle];
     
-    self.post.content = _textView.text;
+    NSString *test = [htmlWriter HTMLFragment];
+    
+    self.post.content = [htmlWriter HTMLFragment];
 	if ([self.post.content rangeOfString:@"<!--more-->"].location != NSNotFound)
 		self.post.mt_text_more = @"";
     
@@ -1235,12 +1241,12 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
             [self.titleTextField resignFirstResponder];
         }
         [self.view endEditing:YES];
-    } else {
-        NSString *oldText = _textView.text;
-        NSRange oldRange = _textView.selectedRange;
-        [self wrapSelectionWithTag:buttonItem.actionTag];
-        [[_textView.undoManager prepareWithInvocationTarget:self] restoreText:oldText withRange:oldRange];
-        [_textView.undoManager setActionName:buttonItem.actionName];
+    } else if ([buttonItem.actionTag isEqualToString:@"strong"]){
+        [self addOrRemoveFontTraitWithName:@"Bold" andValue:UIFontDescriptorTraitBold];
+    } else if ([buttonItem.actionTag isEqualToString:@"em"]){
+        [self addOrRemoveFontTraitWithName:@"Italic" andValue:UIFontDescriptorTraitItalic];
+    } else if ([buttonItem.actionTag isEqualToString:@"u"]){
+        [self underlineText];
     }
 }
 
@@ -1468,6 +1474,83 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
     [self.navigationController setToolbarHidden:NO animated:NO];
     
     [self positionTextView:notification];
+}
+
+#pragma mark -
+#pragma mark Text Kit!
+
+-(void)applyStyletoSelection:(NSString *)style{
+    // 1. Get the range of the selected text.
+    NSRange range = [_textView selectedRange];
+    
+    // 2. Create a new font with the selected text style.
+    UIFont *styledFont = [UIFont preferredFontForTextStyle:style];
+    
+    // 3. Begin editing the text storage.
+    [_textView.textStorage beginEditing];
+    
+    // 4. Create a dictionary with the new font as the value and the NSFontAttributeName property as a key.
+    NSDictionary *dict = @{NSFontAttributeName : styledFont};
+    
+    // 5. Set the new attributes to the text storage object of the selected text.
+    [_textView.textStorage setAttributes:dict range:range];
+    
+    // 6. Notify that we end editing the text storage.
+    [_textView.textStorage endEditing];
+}
+
+-(void)addOrRemoveFontTraitWithName:(NSString *)traitName andValue:(uint32_t)traitValue{
+    NSRange selectedRange = [_textView selectedRange];
+    
+    NSDictionary *currentAttributesDict = [_textView.textStorage attributesAtIndex:selectedRange.location
+                                                                    effectiveRange:nil];
+    
+    UIFont *currentFont = [currentAttributesDict objectForKey:NSFontAttributeName];
+    
+    UIFontDescriptor *fontDescriptor = [currentFont fontDescriptor];
+    
+    NSString *fontNameAttribute = [[fontDescriptor fontAttributes] objectForKey:UIFontDescriptorNameAttribute];
+    UIFontDescriptor *changedFontDescriptor;
+    
+    if ([fontNameAttribute rangeOfString:traitName].location == NSNotFound) {
+        uint32_t existingTraitsWithNewTrait = [fontDescriptor symbolicTraits] | traitValue;
+        changedFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:existingTraitsWithNewTrait];
+    }
+    else{
+        uint32_t existingTraitsWithoutTrait = [fontDescriptor symbolicTraits] & ~traitValue;
+        changedFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:existingTraitsWithoutTrait];
+    }
+    
+    UIFont *updatedFont = [UIFont fontWithDescriptor:changedFontDescriptor size:0.0];
+    
+    NSDictionary *dict = @{NSFontAttributeName: updatedFont};
+    
+    [_textView.textStorage beginEditing];
+    [_textView.textStorage setAttributes:dict range:selectedRange];
+    [_textView.textStorage endEditing];
+}
+
+- (void)underlineText {
+    NSRange selectedRange = [_textView selectedRange];
+    
+    NSDictionary *currentAttributesDict = [_textView.textStorage attributesAtIndex:selectedRange.location
+                                                                    effectiveRange:nil];
+    
+    NSDictionary *dict;
+    
+    if ([currentAttributesDict objectForKey:NSUnderlineStyleAttributeName] == nil ||
+        [[currentAttributesDict objectForKey:NSUnderlineStyleAttributeName] intValue] == 0) {
+        
+        dict = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInt:1]};
+        
+    }
+    else{
+        dict = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInt:0]};
+    }
+    
+    [_textView.textStorage beginEditing];
+    [_textView.textStorage setAttributes:dict range:selectedRange];
+    [_textView.textStorage endEditing];
 }
 
 @end
