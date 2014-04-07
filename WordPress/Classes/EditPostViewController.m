@@ -731,11 +731,18 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
         _textView.text = @"";
     } else {
         _tapToStartWritingLabel.hidden = YES;
+        NSString *postContentHtml;
         if ((self.post.mt_text_more != nil) && ([self.post.mt_text_more length] > 0)) {
-			_textView.text = [NSString stringWithFormat:@"%@\n<!--more-->\n%@", self.post.content, self.post.mt_text_more];
+			postContentHtml = [NSString stringWithFormat:@"%@\n<!--more-->\n%@", self.post.content, self.post.mt_text_more];
         } else {
-			_textView.text = self.post.content;
+			postContentHtml = self.post.content;
         }
+        
+        // TODO: This is probably very slow
+        _textView.attributedText = [[NSAttributedString alloc] initWithData:[postContentHtml dataUsingEncoding:NSUTF8StringEncoding]
+                                         options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                   NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                              documentAttributes:nil error:nil];
     }
     
     [self refreshButtons];
@@ -910,9 +917,6 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
     
     self.post.postTitle = _titleTextField.text;
     self.navigationItem.title = [self editorTitle];
-    
-    NSString *test = [htmlWriter HTMLFragment];
-    
     self.post.content = [htmlWriter HTMLFragment];
 	if ([self.post.content rangeOfString:@"<!--more-->"].location != NSNotFound)
 		self.post.mt_text_more = @"";
@@ -1242,11 +1246,11 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
         }
         [self.view endEditing:YES];
     } else if ([buttonItem.actionTag isEqualToString:@"strong"]){
-        [self addOrRemoveFontTraitWithName:@"Bold" andValue:UIFontDescriptorTraitBold];
+        [_textView addOrRemoveFontTraitWithName:@"Bold" andValue:UIFontDescriptorTraitBold];
     } else if ([buttonItem.actionTag isEqualToString:@"em"]){
-        [self addOrRemoveFontTraitWithName:@"Italic" andValue:UIFontDescriptorTraitItalic];
+        [_textView addOrRemoveFontTraitWithName:@"Italic" andValue:UIFontDescriptorTraitItalic];
     } else if ([buttonItem.actionTag isEqualToString:@"u"]){
-        [self underlineText];
+        [_textView underlineText];
     }
 }
 
@@ -1474,83 +1478,6 @@ CGFloat const EPVCTextViewTopPadding = 7.0f;
     [self.navigationController setToolbarHidden:NO animated:NO];
     
     [self positionTextView:notification];
-}
-
-#pragma mark -
-#pragma mark Text Kit!
-
--(void)applyStyletoSelection:(NSString *)style{
-    // 1. Get the range of the selected text.
-    NSRange range = [_textView selectedRange];
-    
-    // 2. Create a new font with the selected text style.
-    UIFont *styledFont = [UIFont preferredFontForTextStyle:style];
-    
-    // 3. Begin editing the text storage.
-    [_textView.textStorage beginEditing];
-    
-    // 4. Create a dictionary with the new font as the value and the NSFontAttributeName property as a key.
-    NSDictionary *dict = @{NSFontAttributeName : styledFont};
-    
-    // 5. Set the new attributes to the text storage object of the selected text.
-    [_textView.textStorage setAttributes:dict range:range];
-    
-    // 6. Notify that we end editing the text storage.
-    [_textView.textStorage endEditing];
-}
-
--(void)addOrRemoveFontTraitWithName:(NSString *)traitName andValue:(uint32_t)traitValue{
-    NSRange selectedRange = [_textView selectedRange];
-    
-    NSDictionary *currentAttributesDict = [_textView.textStorage attributesAtIndex:selectedRange.location
-                                                                    effectiveRange:nil];
-    
-    UIFont *currentFont = [currentAttributesDict objectForKey:NSFontAttributeName];
-    
-    UIFontDescriptor *fontDescriptor = [currentFont fontDescriptor];
-    
-    NSString *fontNameAttribute = [[fontDescriptor fontAttributes] objectForKey:UIFontDescriptorNameAttribute];
-    UIFontDescriptor *changedFontDescriptor;
-    
-    if ([fontNameAttribute rangeOfString:traitName].location == NSNotFound) {
-        uint32_t existingTraitsWithNewTrait = [fontDescriptor symbolicTraits] | traitValue;
-        changedFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:existingTraitsWithNewTrait];
-    }
-    else{
-        uint32_t existingTraitsWithoutTrait = [fontDescriptor symbolicTraits] & ~traitValue;
-        changedFontDescriptor = [fontDescriptor fontDescriptorWithSymbolicTraits:existingTraitsWithoutTrait];
-    }
-    
-    UIFont *updatedFont = [UIFont fontWithDescriptor:changedFontDescriptor size:0.0];
-    
-    NSDictionary *dict = @{NSFontAttributeName: updatedFont};
-    
-    [_textView.textStorage beginEditing];
-    [_textView.textStorage setAttributes:dict range:selectedRange];
-    [_textView.textStorage endEditing];
-}
-
-- (void)underlineText {
-    NSRange selectedRange = [_textView selectedRange];
-    
-    NSDictionary *currentAttributesDict = [_textView.textStorage attributesAtIndex:selectedRange.location
-                                                                    effectiveRange:nil];
-    
-    NSDictionary *dict;
-    
-    if ([currentAttributesDict objectForKey:NSUnderlineStyleAttributeName] == nil ||
-        [[currentAttributesDict objectForKey:NSUnderlineStyleAttributeName] intValue] == 0) {
-        
-        dict = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInt:1]};
-        
-    }
-    else{
-        dict = @{NSUnderlineStyleAttributeName: [NSNumber numberWithInt:0]};
-    }
-    
-    [_textView.textStorage beginEditing];
-    [_textView.textStorage setAttributes:dict range:selectedRange];
-    [_textView.textStorage endEditing];
 }
 
 @end

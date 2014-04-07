@@ -5,6 +5,7 @@
 #import "AbstractPost.h"
 #import "WPKeyboardToolbarBase.h"
 #import "WPKeyboardToolbarDone.h"
+#import "UITextView+RichTextFormatting.h"
 
 typedef NS_ENUM(NSInteger, EditPostViewControllerAlertTag) {
     EditPostViewControllerAlertTagNone,

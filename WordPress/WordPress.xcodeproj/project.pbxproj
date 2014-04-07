@@ -247,6 +247,7 @@
 		37B159F415AC7CEB00333C91 /* sidebar_cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B159F215AC7CEB00333C91 /* sidebar_cell_bg@2x.png */; };
 		37B159F515AC7CEB00333C91 /* sidebar_cell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B159F315AC7CEB00333C91 /* sidebar_cell_bg.png */; };
 		37B7924D16768FCC0021B3A4 /* NotificationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B7924C16768FCB0021B3A4 /* NotificationSettingsViewController.m */; };
+		37C3C57518F2485600E557B1 /* UITextView+RichTextFormatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C3C57418F2485600E557B1 /* UITextView+RichTextFormatting.m */; };
 		37E3024015B6B15A00183F34 /* toolbar_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E3023E15B6B15A00183F34 /* toolbar_delete.png */; };
 		37E3024115B6B15A00183F34 /* toolbar_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E3023F15B6B15A00183F34 /* toolbar_delete@2x.png */; };
 		37E3024515B6B57B00183F34 /* toolbar_reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E3024315B6B57B00183F34 /* toolbar_reply.png */; };
@@ -1288,6 +1289,8 @@
 		37B159F315AC7CEB00333C91 /* sidebar_cell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sidebar_cell_bg.png; path = Resources/Images/sidebar_cell_bg.png; sourceTree = "<group>"; };
 		37B7924B16768FCB0021B3A4 /* NotificationSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettingsViewController.h; sourceTree = "<group>"; };
 		37B7924C16768FCB0021B3A4 /* NotificationSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettingsViewController.m; sourceTree = "<group>"; };
+		37C3C57318F2485600E557B1 /* UITextView+RichTextFormatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+RichTextFormatting.h"; sourceTree = "<group>"; };
+		37C3C57418F2485600E557B1 /* UITextView+RichTextFormatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+RichTextFormatting.m"; sourceTree = "<group>"; };
 		37E3023E15B6B15A00183F34 /* toolbar_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toolbar_delete.png; path = Resources/Images/toolbar_delete.png; sourceTree = "<group>"; };
 		37E3023F15B6B15A00183F34 /* toolbar_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar_delete@2x.png"; path = "Resources/Images/toolbar_delete@2x.png"; sourceTree = "<group>"; };
 		37E3024315B6B57B00183F34 /* toolbar_reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toolbar_reply.png; path = Resources/Images/toolbar_reply.png; sourceTree = "<group>"; };
@@ -3987,6 +3990,8 @@
 				46F8714E1838C41600BC149B /* NSDate+StringFormatting.m */,
 				E2AA87A318523E5300886693 /* UIView+Subviews.h */,
 				E2AA87A418523E5300886693 /* UIView+Subviews.m */,
+				37C3C57318F2485600E557B1 /* UITextView+RichTextFormatting.h */,
+				37C3C57418F2485600E557B1 /* UITextView+RichTextFormatting.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -5382,6 +5387,7 @@
 				5DA5BF3F18E32DCF005F11F9 /* InputViewButton.m in Sources */,
 				85325A5917BC42E5008E87D1 /* NewPostTableViewCell.m in Sources */,
 				93FA59E018D8986D001446BC /* CategoryServiceRemote.m in Sources */,
+				37C3C57518F2485600E557B1 /* UITextView+RichTextFormatting.m in Sources */,
 				85D8055D171631F10075EEAC /* SelectWPComLanguageViewController.m in Sources */,
 				E23EEC5E185A72C100F4DE2A /* WPContentCell.m in Sources */,
 				8525398B171761D9003F6B32 /* WPComLanguages.m in Sources */,
